@@ -5,10 +5,7 @@ var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine','hbs');
-app.use((req,res,next) => {
-  console.log(req.query);
-  next();
-});
+
 app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('up',(text) => {
@@ -20,6 +17,10 @@ app.get('/',(req,res) => {
     year: new Date().getFullYear(),
     message: 'this will be up'
   });
+});
+
+app.get('/projects',(req,res) => {
+  res.render('projects.hbs');
 });
 
 app.get('/about',(req,res) => {
